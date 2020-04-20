@@ -1,0 +1,58 @@
+<html>
+
+<body>
+
+<form action="{% url 'upload' %}" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <table>
+    <tr>
+      <td>
+        <label for="email">email:</label>
+      </td>
+      <td>
+        <input type="email" id="email" name="email">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="lab">lab:</label>
+      </td>
+      <td>
+        <input type="text" id="lab" name="lab">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="project">project:</label>
+      </td>
+      <td>
+        <input type="text" id="project" name="project">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="instrument">instrument:</label>
+      </td>
+      <td>
+        <input type="text" id="instrument" name="instrument">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="image">image:</label>
+      </td>
+      <td>
+        <input type="file" id="image" name="image">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="submit" value="submit image">
+      </td>
+    </tr>
+  </table>
+</form>
+
+</body>
+
+</html>
