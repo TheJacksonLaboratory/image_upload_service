@@ -49,16 +49,18 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     # 'django.contrib.messages',
     "django.contrib.staticfiles",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
     # 'django.middleware.security.SecurityMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
+    # "django.middleware.csrf.CsrfViewMiddleware",
     # 'django.contrib.auth.middleware.AuthenticationMiddleware',
     # 'django.contrib.messages.middleware.MessageMiddleware',
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = "rit_image_upload.urls"
@@ -132,3 +134,36 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 FILE_UPLOAD_DIR = config["image uploader"]["save dir"]
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '[{asctime} - {name} - {filename}:{lineno} {levelname}] {message}',
+            'style': '{',
+        },
+    },
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'rit_image_upload': {
+            'handlers': ['console'],
+            'propagate': True,
+            "level": "DEBUG"
+        },
+    }
+}
+
+CORS_ORIGIN_ALLOW_ALL = True

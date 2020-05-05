@@ -1,0 +1,1 @@
+browserify tus-wrapper.js -s tus_wrapper -o static/tus-wrapper.js

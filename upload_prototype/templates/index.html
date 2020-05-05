@@ -1,9 +1,62 @@
 <html>
 
+<head>
+
+<script>
+
+/*jshint esversion: 6 */
+
+console.log("entered script tag");
+
+{{ script|safe }}
+
+
+console.log("loaded inserted script");
+
+function verifyAndUpload(){
+  console.log("in central function");
+  // Get form data
+  
+  tus_wrapper.null_case();
+
+  let email_val = document.getElementById("email").value;
+  let password_val = document.getElementById("password").value;
+  let lab_val = document.getElementById("lab").value;
+  let project_val = document.getElementById("project").value;
+  let instrument_val = document.getElementById("instrument").value;
+
+  let image_file = document.getElementById("image");
+
+  //Make sure passed values are filled, then send to tusd.
+  if(!email_val) return;
+  if(!password_val) return;
+  if(!lab_val) return;
+  if(!project_val) return;
+  if(!instrument_val) return;
+  if(image_file.files.length <= 0) return;
+
+  for(var i=0; i < image_file.files.length; ++i){
+    tus_wrapper.tus_wrapper(
+      image_file.files[i], 
+      image_file.files[i].name, 
+      image_file.files[i].size, 
+      email_val, 
+      password_val, 
+      lab_val, 
+      project_val, 
+      instrument_val
+    );
+  }
+}
+
+console.log("defined central function");
+
+</script>
+</head>
+
 <body>
 
-<form action="{% url 'upload' %}" method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
+<form enctype="multipart/form-data">
   <table>
     <tr>
       <td>
@@ -11,6 +64,14 @@
       </td>
       <td>
         <input type="email" id="email" name="email">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="password">JAX password:</label>
+      </td>
+      <td>
+        <input type="password" id="password" name="password">
       </td>
     </tr>
     <tr>
@@ -47,7 +108,7 @@
     </tr>
     <tr>
       <td>
-        <input type="submit" value="submit image">
+        <button type="button" onclick="verifyAndUpload()">submit image</button>
       </td>
     </tr>
   </table>
