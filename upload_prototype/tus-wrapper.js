@@ -13,14 +13,18 @@ null_case();
 
 function tus_wrapper(file, filename, filesize, email, password, lab, project, instrument){ 
 
-	var tus_options = {
-		endpoint: "http://10.4.72.133:1080/files/",
-		headers: {
-			"JAX_EMAIL": btoa(email),
-			"JAX_PASSWORD": btoa(password),
-			"JAX_LAB": btoa(lab),
-			"JAX_INSTRUMENT": btoa(instrument),
-			"JAX_PROJECT": btoa(project)
+    var tus_options = {
+        endpoint: "http://10.4.72.133:1080/files/",
+        headers: {
+            "Upload-Metadata": JSON.stringify(
+                {
+                    "JAX_EMAIL": btoa(email),
+                    "JAX_PASSWORD": btoa(password),
+                    "JAX_LAB": btoa(lab),
+                    "JAX_INSTRUMENT": btoa(instrument),
+                    "JAX_PROJECT": btoa(project)
+                }
+            )
 		},
 		metadata: {
 			filename: filename,
