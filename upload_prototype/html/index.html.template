@@ -1,0 +1,125 @@
+<html>
+
+<head>
+
+<style>
+{{ file.Read "staging/css/jax-bootstrap.min.css" }}
+</style>
+
+<script>
+
+/*jshint esversion: 6 */
+
+console.log("entered script tag");
+
+{{ file.Read "staging/js/jax-bootstrap.min.js" }}
+
+{{ file.Read "staging/js/tus-wrapper-browserify.js" }}
+
+
+console.log("loaded inserted script");
+
+function verifyAndUpload(){
+  console.log("in central function");
+  // Get form data
+  
+  tus_wrapper.null_case();
+
+  let email_val = document.getElementById("email").value;
+  let password_val = document.getElementById("password").value;
+  let lab_val = document.getElementById("lab").value;
+  let project_val = document.getElementById("project").value;
+  let instrument_val = document.getElementById("instrument").value;
+
+  let image_file = document.getElementById("image");
+
+  //Make sure passed values are filled, then send to tusd.
+  if(!email_val) return;
+  if(!password_val) return;
+  if(!lab_val) return;
+  if(!project_val) return;
+  if(!instrument_val) return;
+  if(image_file.files.length <= 0) return;
+
+  for(var i=0; i < image_file.files.length; ++i){
+    tus_wrapper.tus_wrapper(
+      image_file.files[i], 
+      image_file.files[i].name, 
+      image_file.files[i].size, 
+      email_val, 
+      password_val, 
+      lab_val, 
+      project_val, 
+      instrument_val
+    );
+  }
+}
+
+console.log("defined central function");
+
+</script>
+</head>
+
+<body>
+
+<form enctype="multipart/form-data">
+  <table>
+    <tr>
+      <td>
+        <label for="email">email:</label>
+      </td>
+      <td>
+        <input type="email" id="email" name="email">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="password">JAX password:</label>
+      </td>
+      <td>
+        <input type="password" id="password" name="password">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="lab">lab:</label>
+      </td>
+      <td>
+        <input type="text" id="lab" name="lab">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="project">project:</label>
+      </td>
+      <td>
+        <input type="text" id="project" name="project">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="instrument">instrument:</label>
+      </td>
+      <td>
+        <input type="text" id="instrument" name="instrument">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="image">image:</label>
+      </td>
+      <td>
+        <input type="file" id="image" name="image">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <button type="button" onclick="verifyAndUpload()">submit image</button>
+      </td>
+    </tr>
+  </table>
+</form>
+
+</body>
+
+</html>

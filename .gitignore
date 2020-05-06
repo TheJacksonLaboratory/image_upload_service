@@ -8,3 +8,6 @@ metadata.json
 node_modules/
 static/
 data/
+dist/
+staging/
+
