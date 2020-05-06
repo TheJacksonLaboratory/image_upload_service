@@ -1,0 +1,3 @@
+[submodule "jax-bootstrap"]
+	path = jax-bootstrap
+	url = https://github.com/ahcurrier/jax-bootstrap
