@@ -4,6 +4,7 @@
   "description": "Django app paired with tus for handling async uploads.",
   "main": "tus-wrapper.js",
   "dependencies": {
+    "bootstrap": "^4.4.1",
     "tus-js-client": "^1.8.0",
     "utf8": "^3.0.0",
     "watchify": "^3.11.1",
