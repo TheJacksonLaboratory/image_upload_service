@@ -2,17 +2,11 @@
 
 <head>
 
-<style>
-{{ file.Read "staging/css/jax-bootstrap.min.css" }}
-</style>
-
 <script>
 
 /*jshint esversion: 6 */
 
 console.log("entered script tag");
-
-{{ file.Read "staging/js/jax-bootstrap.min.js" }}
 
 {{ file.Read "staging/js/tus-wrapper-browserify.js" }}
 
@@ -24,6 +18,7 @@ function verifyAndUpload(){
   // Get form data
   
   tus_wrapper.null_case();
+  //this["null_case"]();
 
   let email_val = document.getElementById("email").value;
   let password_val = document.getElementById("password").value;
