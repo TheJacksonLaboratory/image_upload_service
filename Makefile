@@ -21,6 +21,11 @@ staging/js/jax-bootstrap.min.js: jax-bootstrap/js/jax-bootstrap.min.js
 	mkdir -p staging/js
 	cp -f jax-bootstrap/js/jax-bootstrap.min.js staging/js/jax-bootstrap.min.js
 
+run:
+	./tusd &
+	mkdir -p logs
+	nginx -p $(pwd) -c nginx.conf
+
 clean:
 	rm -rf staging
 	rm -rf data
