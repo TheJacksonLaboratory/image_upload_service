@@ -36,6 +36,8 @@ function tus_wrapper(file, filename, filesize, email, password, lab, project, in
 		onProgress: function(bytesUploaded, bytesTotal) {
 			var percentage = (bytesUploaded / bytesTotal * 100).toFixed(2);
 			console.log(bytesUploaded, bytesTotal, percentage + "%");
+			document.getElementById("upload_progress").style.width = percentage + "%";
+			document.getElementById("upload_progress").innerHTML = bytesUploaded + "/" + bytesTotal;
 		},
 		onSuccess: function() {
 			console.log("Download %s from %s", filename, upload.url);
@@ -47,6 +49,7 @@ function tus_wrapper(file, filename, filesize, email, password, lab, project, in
 		chunkSize: 5 * 1024 * 1024
 	};
 
+	document.getElementById("upload_text").innerHTML = filename;
 	var upload = new tus.Upload(file, tus_options);
 
 	upload.start();

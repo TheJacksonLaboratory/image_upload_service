@@ -1,6 +1,8 @@
 <html>
 
 <head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
 
 <script>
 
@@ -114,6 +116,10 @@ console.log("defined central function");
     </tr>
   </table>
 </form>
+<span id="upload_text">No files have been uploaded</span><br>
+<div class="w3-light-grey" style="width:100%;background-color:grey">
+  <div class="w3-container w3-green w3-center" style="width:1%;height:30px;background-color:green" id="upload_progress">0%</div>
+</div> 
 
 </body>
 

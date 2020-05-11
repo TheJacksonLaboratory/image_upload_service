@@ -13,13 +13,13 @@ staging/js/tus_wrapper.js: js/tus_wrapper.js
 	mkdir -p staging/js
 	browserify js/tus_wrapper.js --s tus_wrapper -o staging/js/tus-wrapper-browserify.js
 
-staging/css/jax-bootstrap.min.css: jax-bootstrap/css/jax-bootstrap.min.css
-	mkdir -p staging/css
-	cp -f jax-bootstrap/css/jax-bootstrap.min.css staging/css/jax-bootstrap.min.css
+#staging/css/jax-bootstrap.min.css: jax-bootstrap/css/jax-bootstrap.min.css
+#	mkdir -p staging/css
+#	cp -f jax-bootstrap/css/jax-bootstrap.min.css staging/css/jax-bootstrap.min.css
 
-staging/js/jax-bootstrap.min.js: jax-bootstrap/js/jax-bootstrap.min.js
-	mkdir -p staging/js
-	cp -f jax-bootstrap/js/jax-bootstrap.min.js staging/js/jax-bootstrap.min.js
+#staging/js/jax-bootstrap.min.js: jax-bootstrap/js/jax-bootstrap.min.js
+#	mkdir -p staging/js
+#	cp -f jax-bootstrap/js/jax-bootstrap.min.js staging/js/jax-bootstrap.min.js
 
 run:
 	./tusd &
