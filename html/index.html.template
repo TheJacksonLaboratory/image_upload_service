@@ -5,54 +5,9 @@
 <meta content="utf-8" http-equiv="encoding">
 
 <script>
-
 /*jshint esversion: 6 */
 
-console.log("entered script tag");
-
 {{ file.Read "staging/js/tus-wrapper-browserify.js" }}
-
-
-console.log("loaded inserted script");
-
-function verifyAndUpload(){
-  console.log("in central function");
-  // Get form data
-  
-  tus_wrapper.null_case();
-  //this["null_case"]();
-
-  let email_val = document.getElementById("email").value;
-  let password_val = document.getElementById("password").value;
-  let lab_val = document.getElementById("lab").value;
-  let project_val = document.getElementById("project").value;
-  let instrument_val = document.getElementById("instrument").value;
-
-  let image_file = document.getElementById("image");
-
-  //Make sure passed values are filled, then send to tusd.
-  if(!email_val) return;
-  if(!password_val) return;
-  if(!lab_val) return;
-  if(!project_val) return;
-  if(!instrument_val) return;
-  if(image_file.files.length <= 0) return;
-
-  for(var i=0; i < image_file.files.length; ++i){
-    tus_wrapper.tus_wrapper(
-      image_file.files[i], 
-      image_file.files[i].name, 
-      image_file.files[i].size, 
-      email_val, 
-      password_val, 
-      lab_val, 
-      project_val, 
-      instrument_val
-    );
-  }
-}
-
-console.log("defined central function");
 
 </script>
 </head>
@@ -69,7 +24,7 @@ console.log("defined central function");
         <input type="email" id="email" name="email">
       </td>
     </tr>
-    <tr>
+    <tr style="display:none">
       <td>
         <label for="password">JAX password:</label>
       </td>
@@ -106,20 +61,22 @@ console.log("defined central function");
         <label for="image">image:</label>
       </td>
       <td>
-        <input type="file" id="image" name="image">
+        <input type="file" id="image" name="image" multiple>
       </td>
     </tr>
     <tr>
       <td>
-        <button type="button" onclick="verifyAndUpload()">submit image</button>
+        <button type="button" onclick="tus_wrapper.verifyAndUpload()">submit image</button>
       </td>
     </tr>
   </table>
 </form>
 <span id="upload_text">No files have been uploaded</span><br>
-<div class="w3-light-grey" style="width:100%;background-color:grey">
-  <div class="w3-container w3-green w3-center" style="width:1%;height:30px;background-color:green" id="upload_progress">0%</div>
+<div class="w3-light-grey" id="upload_bar" style="width:100%;background-color:grey;display:none">
+  <div class="w3-container w3-green w3-center" style="width:0%;height:30px;background-color:green;display:none" id="upload_progress">0%</div>
 </div> 
+<div id="pending_files"></div>
+<div id="uploaded_files"></div>
 
 </body>
 
