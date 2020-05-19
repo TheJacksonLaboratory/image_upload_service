@@ -14,6 +14,8 @@ Licensed under AGPLv3
 
 ## Build
 
+<h3>NOTE: update the upload server address in the tus options struct in the javascript file.</h3>
+
 `make`
 
 ## Running

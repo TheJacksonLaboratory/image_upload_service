@@ -46,7 +46,7 @@ function tus_wrapper(pending_uploads, completed_uploads, email, lab, project, in
     }
 
     var tus_options = {
-        endpoint: "http://10.4.72.133:1080/files/",
+	    endpoint: "http://ctlin0030:1080/files/",
         headers: {
             "Upload-Metadata": JSON.stringify(
                 {
