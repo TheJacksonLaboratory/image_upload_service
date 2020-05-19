@@ -1,10 +1,10 @@
 # Research IT Large Image Uploader
 
+Licensed under AGPLv3
+
 ## About
 
 This defines a static webservice and a tus endpoint which can be used for uploading extremely large image files which would be too large to upload stablely using plain HTTP.
-
-Licensed under AGPLv3
 
 ## Requirements
 
@@ -32,4 +32,6 @@ If this is the first setup and run of the server, run `npm install` to install t
 
 The example invocation in `make run` can be used to start the service.  It is advised to not use this as given, as your setup will likely vary.
 
-
+## Contacts
+ * [Josh Marshall](mailto:josh.marshall@jax.org) (developer)
+ * [Dave Mellert](mailto:Dave.Mellert@jax.org) (owner)
