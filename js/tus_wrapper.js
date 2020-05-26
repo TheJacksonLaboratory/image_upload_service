@@ -79,7 +79,7 @@ function tus_wrapper(
     }
 
     var tus_options = {
-        endpoint: "http://10.4.72.133:1080/files/",
+	    endpoint: "http://ctlin0030:1080/files/",
         headers: {
             "Upload-Metadata": JSON.stringify(
                 {
