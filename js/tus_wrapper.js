@@ -1,10 +1,28 @@
 #!/usr/bin/env node
 
+/******************************************************************************
+This file is specifically tailored to interface with the 
+'html/index.html.template' file in this project, connecting its various
+elements to tus uploads.
+
+This file is designed as a node.js module, and uses npm and browserify to
+add external javascript modules required for this file to work as a compilation
+step.  The end result of this while process is a single static file with no
+file or code dependencies.
+
+The expected entry function is 'verifyAndUpload()', which is designed to ensure
+valid input, and kicks of the workinf function, `tus_wrapper()`.  This is a
+recursive function in order to correctly and easily handle the otherwise
+asynchronous behavior of tus uploads in order to provide simple and stable
+interface updates.  `tus_wrapper()` handles termination conditions, triggers
+interface changes, tus options, and run state.
+******************************************************************************/
+
 var tus = require("tus-js-client");
 
-//const mutex = new Mutex();
 
 // https://stackoverflow.com/a/9050354
+// Add '.last()' to arrays.
 if (!Array.prototype.last){
   Array.prototype.last = function(){
     return this[this.length - 1];
@@ -13,6 +31,9 @@ if (!Array.prototype.last){
 
 
 function refresh_pending_and_completed_lists(pending_uploads, completed_uploads){
+// Helper function to update UI elements about which files have been uploaded,
+// and which files are have not yet been uploaded.
+
 
   string_list_pending = [];
   string_list_completed = [];
@@ -34,7 +55,19 @@ function refresh_pending_and_completed_lists(pending_uploads, completed_uploads)
 }
 
 
-function tus_wrapper(pending_uploads, completed_uploads, email, lab, project, instrument){ 
+function tus_wrapper(
+  pending_uploads,
+  completed_uploads,
+  email,
+  lab,
+  project,
+  instrument
+){ 
+// Worker function, responsible for correctly syncronizing interface state with
+// run state.  It first updates the UI to a neutral state, checks for
+// terminating conditions, if termination is needed update the UI and exit else
+// initialize tus options, update UI, and start next tus upload.  At upload
+// completion, runtime state is updated, and this function called again.
 
     document.getElementById("upload_text").innerHTML = ""; 
     document.getElementById("upload_progress").style.display = "none"; 
@@ -94,6 +127,10 @@ function tus_wrapper(pending_uploads, completed_uploads, email, lab, project, in
 }
 
 function verifyAndUpload(){
+// Entrypoint, checks input, does basic restructuring, then calls the worker
+// function `tus_wrapper()`.
+
+
   console.log("in central function");
   // Get form data
 
@@ -122,5 +159,7 @@ function verifyAndUpload(){
   );
 }
 
-module.exports = {tus_wrapper: tus_wrapper, verifyAndUpload: verifyAndUpload};
+// As a part of being a node module, some functions should be accessible
+// outside of this module.  List those here.
+module.exports = {verifyAndUpload: verifyAndUpload};
 
